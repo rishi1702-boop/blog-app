@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import axios from "axios";
+import { API_URL } from "../config";
 
 export const useAuthStore = create((set) => ({
   currentUser: (() => {
@@ -21,7 +22,7 @@ export const useAuthStore = create((set) => ({
     try {
 
       const res = await axios.post(
-        "http://localhost:4000/common-api/login",
+        `${API_URL}/common-api/login`,
         userCred,
         { withCredentials: true }
       );
@@ -56,7 +57,7 @@ export const useAuthStore = create((set) => ({
   checkAuth: async () => {
     set({ loading: true, error: null });
     try {
-      const res = await axios.get("http://localhost:4000/common-api/check-auth", {
+      const res = await axios.get(`${API_URL}/common-api/check-auth`, {
         withCredentials: true,
       });
 
@@ -90,7 +91,7 @@ export const useAuthStore = create((set) => ({
   // LOGOUT
   logout: async () => {
     try {
-      await axios.get("http://localhost:4000/common-api/logout", {
+      await axios.get(`${API_URL}/common-api/logout`, {
         withCredentials: true,
       });
     } catch (err) {

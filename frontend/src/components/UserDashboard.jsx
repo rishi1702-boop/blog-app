@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuthStore } from '../store/authStore';
 import { useNavigate } from 'react-router';
 import { Toaster, toast } from 'react-hot-toast'
+import { API_URL } from '../config';
 import {
   pageWrapper,
   pageTitleClass,
@@ -34,7 +35,7 @@ function UserDashboard() {
       try {
         if (isAuthenticated) {
           setLoading(true);
-          let res = await fetch("http://localhost:4000/user-api/articles", {
+          let res = await fetch(`${API_URL}/user-api/articles`, {
             method: "GET",
             credentials: "include"
           });

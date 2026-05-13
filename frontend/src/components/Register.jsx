@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import axios from "axios";
+import { API_URL } from "../config";
 
 import {
   pageBackground,
@@ -40,8 +41,8 @@ function Register() {
       }
 
       const endpoint = role === "AUTHOR" 
-        ? "http://localhost:4000/author-api/users" 
-        : "http://localhost:4000/user-api/users";
+        ? `${API_URL}/author-api/users` 
+        : `${API_URL}/user-api/users`;
 
       let resObj = await axios.post(endpoint, formData);
 

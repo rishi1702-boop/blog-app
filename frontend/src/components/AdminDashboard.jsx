@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuthStore } from "../store/authStore";
 import { useNavigate } from "react-router";
+import { API_URL } from "../config";
 
 import {
   pageWrapper,
@@ -29,7 +30,7 @@ function AdminDashboard() {
       try {
         setLoading(true);
         // Fetch all articles using the user-api endpoint which works for ADMIN as well
-        const res = await axios.get("http://localhost:4000/user-api/articles", {
+        const res = await axios.get(`${API_URL}/user-api/articles`, {
           withCredentials: true
         });
 

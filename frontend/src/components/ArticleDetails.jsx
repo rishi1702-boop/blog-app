@@ -16,6 +16,7 @@ import {
 import { useAuthStore } from '../store/authStore';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
+import { API_URL } from '../config';
 
 function ArticleDetails() {
   const { state } = useLocation();
@@ -32,7 +33,7 @@ function ArticleDetails() {
     const fetchArticle = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:4000/user-api/articles/${state?._id}`,
+          `${API_URL}/user-api/articles/${state?._id}`,
           { withCredentials: true }
         );
         if (res.data.payload) {
@@ -80,7 +81,7 @@ function ArticleDetails() {
       setLoading(true);
 
       const res = await axios.post(
-        `http://localhost:4000/user-api/articles/${article._id}/comment`,
+        `${API_URL}/user-api/articles/${article._id}/comment`,
         { comment: commentText },
         { withCredentials: true }
       );
@@ -102,7 +103,7 @@ function ArticleDetails() {
   const handleDeleteComment = async (commentId) => {
     try {
       const res = await axios.delete(
-        `http://localhost:4000/user-api/articles/${article._id}/comments/${commentId}`,
+        `${API_URL}/user-api/articles/${article._id}/comments/${commentId}`,
         { withCredentials: true }
       );
 

@@ -14,7 +14,10 @@ config();
 
 const app = exp();
 
-app.use(cors({ origin: ['http://localhost:5173'], credentials: true }));
+app.use(cors({ 
+  origin: ['http://localhost:5173', process.env.CLIENT_URL], 
+  credentials: true 
+}));
 
 app.use(exp.json());
 app.use(cookieParser());
@@ -29,7 +32,8 @@ const connectDB = async () => {
     await connect(process.env.DB_URL);
     console.log('DB connection success');
 
-    app.listen(process.env.PORT, () => console.log('Server started'));
+    const port = process.env.PORT || 4000;
+    app.listen(port, () => console.log(`Server started on port ${port}`));
   } catch (err) {
     console.log('err in Db connection', err);
   }

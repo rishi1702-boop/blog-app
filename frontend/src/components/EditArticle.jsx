@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { API_URL } from "../config";
 
 import {
   pageBackground,
@@ -48,7 +49,7 @@ function EditArticle() {
       setError(null);
 
       const res = await axios.put(
-        `http://localhost:4000/author-api/articles/${article._id}`,
+        `${API_URL}/author-api/articles/${article._id}`,
         data,
         { withCredentials: true }
       );

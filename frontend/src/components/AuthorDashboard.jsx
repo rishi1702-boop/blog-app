@@ -3,6 +3,7 @@ import axios from "axios";
 import { useAuthStore } from "../store/authStore";
 import { useNavigate } from "react-router";
 import { toast } from "react-hot-toast";
+import { API_URL } from "../config";
 
 import {
   pageWrapper,
@@ -29,7 +30,7 @@ function AuthorDashboard() {
       try {
 
         const res = await axios.get(
-          `http://localhost:4000/author-api/articles/${currentUser._id}`,
+          `${API_URL}/author-api/articles/${currentUser._id}`,
           { withCredentials: true }
         );
 
@@ -51,7 +52,7 @@ function AuthorDashboard() {
   const handleToggleStatus = async (articleId, currentStatus) => {
     try {
       const res = await axios.patch(
-        `http://localhost:4000/author-api/articles/${articleId}`,
+        `${API_URL}/author-api/articles/${articleId}`,
         {},
         { withCredentials: true }
       );
