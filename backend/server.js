@@ -15,7 +15,8 @@ config();
 const app = exp();
 
 app.use(cors({ 
-  origin: ['http://localhost:5173', process.env.CLIENT_URL], 
+  origin: ['http://localhost:5173',
+  'https://blog-app-ten-tawny-77.vercel.app/', process.env.CLIENT_URL], 
   credentials: true 
 }));
 
