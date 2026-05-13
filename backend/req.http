@@ -1,0 +1,206 @@
+@baseUrl = http://localhost:4000
+
+############################################################
+
+# 1. CREATE USER
+
+############################################################
+
+###
+
+POST {{baseUrl}}/user-api/users
+Content-Type: application/json
+
+{
+"firstName": "Rahul",
+"lastName": "Kumar",
+"email": "[rahuluser1@gmail.com](mailto:rahuluser1@gmail.com)",
+"password": "User@123",
+"profileImageUrl": "https://example.com/user1.jpg"
+}
+
+############################################################
+
+# 2. CREATE AUTHOR
+
+############################################################
+
+###
+
+POST {{baseUrl}}/author-api/users
+Content-Type: application/json
+
+{
+"firstName": "Anil",
+"lastName": "Reddy",
+"email": "anilauthor1@gmail.com",
+"password": "Author@123",
+"profileImageUrl": "https://example.com/author1.jpg"
+}
+
+############################################################
+
+# 3. LOGIN AS AUTHOR
+
+############################################################
+
+###
+
+POST {{baseUrl}}/common-api/login
+Content-Type: application/json
+
+{
+"email": "anilauthor1@gmail.com",
+"password": "Author@123"
+}
+
+############################################################
+
+# 4. CREATE ARTICLE
+
+# After author creation copy AUTHOR _id and replace below
+
+############################################################
+
+###
+
+POST {{baseUrl}}/author-api/articles
+Content-Type: application/json
+
+{
+"author": "69b52012d7e420ef92af6e0c",
+"title": "Introduction to JavaScript",
+"category": "programming",
+"content": "JavaScript is a powerful language used for web development."
+}
+
+############################################################
+
+# 5. READ ARTICLES OF AUTHOR
+
+# Replace AUTHOR ID
+
+############################################################
+
+###
+
+GET {{baseUrl}}/author-api/articles/69b52012d7e420ef92af6e0c
+
+############################################################
+
+# 6. UPDATE ARTICLE
+
+# Replace ARTICLE ID
+
+############################################################
+
+###
+
+PUT {{baseUrl}}/author-api/articles/69b520aad7e420ef92af6e10
+Content-Type: application/json
+
+{
+"author": "69b52012d7e420ef92af6e0c",
+"title": "Advanced JavaScript",
+"category": "programming",
+"content": "Topics include closures, promises, and async/await."
+}
+
+############################################################
+
+# 7. SOFT DELETE / ACTIVATE ARTICLE
+
+############################################################
+
+###
+
+PATCH {{baseUrl}}/author-api/articles/69b520aad7e420ef92af6e10
+
+############################################################
+
+# 8. LOGIN AS USER
+
+############################################################
+
+###
+
+POST {{baseUrl}}/common-api/login
+Content-Type: application/json
+
+{
+"email": "rahuluser1@gmail.com",
+"password": "User@123"
+}
+
+############################################################
+
+# 9. USER READ ALL ARTICLES
+
+############################################################
+
+###
+
+GET {{baseUrl}}/user-api/articles
+
+############################################################
+
+# 10. ADD COMMENT
+
+############################################################
+
+###
+
+POST {{baseUrl}}/user-api/articles/69b520aad7e420ef92af6e10/comment
+Content-Type: application/json
+
+{
+"comment": "Very helpful article! Thanks for sharing."
+}
+
+############################################################
+
+# 11. LOGIN AS ADMIN
+
+############################################################
+
+###
+
+POST {{baseUrl}}/common-api/login
+Content-Type: application/json
+
+{
+    "email": "admin@gmail.com",
+    "password": "Admin@123"
+}
+
+############################################################
+
+# 12. BLOCK USER
+
+# Replace USER ID
+
+############################################################
+
+###
+
+DELETE {{baseUrl}}/admin-api/users/69b52012d7e420ef92af6e0c
+
+############################################################
+
+# 13. UNBLOCK USER
+
+############################################################
+
+###
+
+PATCH {{baseUrl}}/admin-api/users/69b52012d7e420ef92af6e0c/unblock
+
+############################################################
+
+# 14. LOGOUT
+
+############################################################
+
+###
+
+GET {{baseUrl}}/common-api/logout
