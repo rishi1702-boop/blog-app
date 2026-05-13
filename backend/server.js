@@ -57,9 +57,13 @@ app.use((err, req, res, next) => {
     return res.status(400).json({ message: 'Invalid ID format' });
   }
 
-  if (err.code === 11000) {
-    return res.status(409).json({ message: 'Duplicate field value' });
+  // Duplicate key error — check err.code directly and also nested cause
+  const errCode = err.code || err?.cause?.code;
+  if (errCode === 11000 || err.name === 'MongoServerError' && err.message?.includes('duplicate key')) {
+    return res.status(409).json({ message: 'Email already exists' });
   }
 
-  res.status(500).json({ message: 'Internal Server Error' });
+  // Surface actual error message for debugging (remove in production if needed)
+  const status = err.status || 500;
+  res.status(status).json({ message: err.message || 'Internal Server Error' });
 });

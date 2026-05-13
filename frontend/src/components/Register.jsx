@@ -51,7 +51,7 @@ function Register() {
       }
 
     } catch (err) {
-      setError(err.response?.data?.error || "Registration Failed");
+      setError(err.response?.data?.message || "Registration Failed");
     } finally {
       setLoading(false);
     }
